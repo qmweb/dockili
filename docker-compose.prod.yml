@@ -1,0 +1,10 @@
+services:
+  app:
+    image: registry.qmweb.fr/${APP_NAME}:latest
+    pull_policy: always
+    restart: on-failure:2
+    ports:
+      - 3000
+    env_file:
+      - ./.env
+    command: yarn run start:prod

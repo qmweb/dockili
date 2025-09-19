@@ -1,0 +1,31 @@
+name: Task Request 🛠️
+description: General tasks
+title: '🛠️ [TASK] - '
+labels: ['task', 'needs-triage']
+body:
+  - type: textarea
+    id: task-details
+    attributes:
+      label: 'Task Description'
+      placeholder: 'Provide the details of the task'
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: priority
+    attributes:
+      label: 'Priority'
+      options:
+        - label: High
+        - label: Medium
+        - label: Low
+    validations:
+      required: true
+
+  - type: input
+    id: assignees
+    attributes:
+      label: 'Assignees'
+      placeholder: 'Mention team members responsible (comma-separated)'
+    validations:
+      required: false

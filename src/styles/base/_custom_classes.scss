@@ -1,0 +1,19 @@
+@use './mixins' as *;
+@use './variables' as *;
+
+/*
+ ** Container
+ */
+.container {
+  @include container;
+}
+
+/*
+ ** Text
+ */
+.bold {
+  font-weight: $fw-semibold;
+}
+.italic {
+  font-style: italic;
+}

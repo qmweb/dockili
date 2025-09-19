@@ -1,0 +1,17 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint-staged:
+      run: |
+        yarn lint-staged --quiet
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    commitlint:
+      run: yarn commitlint --edit $1
+
+post-commit:
+  scripts:
+    "message.sh":
+      runner: bash

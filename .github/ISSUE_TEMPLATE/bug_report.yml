@@ -1,0 +1,45 @@
+name: Bug report 🐛
+description: Create a report
+title: '🐛 [BUG] - '
+labels: ['bug', 'needs-triage']
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 'Bug Description'
+      placeholder: 'Provide a concise description of the bug with screenshots if possible'
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 'Steps to Reproduce'
+      placeholder: 'Step 1, Step 2, Step 3...'
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: os-environment
+    attributes:
+      label: 'Operating System (OS)'
+      options:
+        - label: Windows
+        - label: MacOS
+        - label: Linux
+        - label: iOS
+        - label: Android
+
+  - type: dropdown
+    id: browser-environment
+    attributes:
+      label: 'Browsers'
+      multiple: true
+      options:
+        - 'Google Chrome'
+        - Firefox
+        - Safari
+        - 'Microsoft Edge'
+        - Opera
+        - Arc
+        - Brave

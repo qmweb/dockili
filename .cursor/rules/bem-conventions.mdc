@@ -1,0 +1,59 @@
+---
+description: "Enforce BEM naming convention for CSS classes using a custom double-underscore format for nested children. Also enforce media queries to be declared inside elements/nested elements directly, not separately."
+alwaysApply: true
+globs:
+  - "**/*.scss"
+  - "**/*.module.scss"
+  - "**/*.tsx"
+---
+
+# Guidelines for BEM & Media Queries
+
+1. **Parent / children / subchildren**
+   - Use **double underscores `__`** between each level.
+   - Example structure:
+     ```scss
+     .card { ... }                   // parent
+     .card__header { ... }           // child
+     .card__header__title { ... }    // subchild
+     .card__body { ... }             // child
+     .card__body__text { ... }       // subchild
+     ```
+
+2. **Modifiers**
+   - Use double hyphen `--` after the full element name.
+   - Example:
+     ```scss
+     .card__header--highlight { ... }
+     .card__body__text--small { ... }
+     ```
+
+3. **Rules**
+   - **Always use parent names as prefix** for nested elements.  
+   - Never skip levels (`.header__title` is not allowed if the parent is `.card`).  
+   - Modifiers always apply to the full element path (`parent__child--modifier` or `parent__child__subchild--modifier`).  
+   - No global styles or random class names inside modules.  
+   - **Always write `@media` queries inside the element or nested element directly, not in a separate block.**
+     ```scss
+     .card__body__text {
+       font-size: 14px;
+
+       @media (min-width: 768px) {
+         font-size: 16px;
+       }
+     }
+     ```
+
+4. **Cursor enforcement**
+   - When generating or refactoring classes, **always follow this BEM hierarchy**.  
+   - Never generate flat class names like `.title`, `.header`, etc., unless explicitly requested.  
+   - Media queries must **always live inside the relevant class nesting**.
+
+# Examples
+✅ `.button__icon { ... }`  
+✅ `.button__icon__svg { ... }`  
+✅ `.button__icon--active { ... }`  
+✅ `.button__icon { color: red; @media (min-width: 768px) { color: blue; } }`  
+❌ `.icon { ... }`  
+❌ `.button-icon { ... }`  
+❌ Separate `@media` blocks outside element definitions  

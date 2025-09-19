@@ -1,0 +1,21 @@
+name: Feature request ✨
+description: Suggest a feature
+title: '✨ [FEATURE REQUEST] - '
+labels: ['enhancement', 'needs-triage']
+body:
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: 'Feature Description'
+      placeholder: 'Describe the feature or improvement you are requesting'
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: priority
+    attributes:
+      label: 'Priority Level'
+      options:
+        - label: Low
+        - label: Medium
+        - label: High

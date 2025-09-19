@@ -1,0 +1,21 @@
+---
+description: "Minimize unnecessary comments. Only add comments for complex code or very specific cases."
+alwaysApply: true
+---
+
+# Guidelines
+- Avoid comments that just repeat what the code does.
+  - ❌ `// increment i by 1` → `i++`
+- Only add comments for:
+  - Complex algorithms, tricky logic, or non-obvious behavior.
+  - Backend-oriented or domain-specific processes where the intent isn’t clear from code.
+  - Special cases or workarounds (why something is done in a specific way).
+
+- For front-end primitives, utilities, or simple functions:
+  - Prefer **self-explanatory names** and clean code instead of comments.
+  - Cursor should **not generate comments automatically** unless explicitly asked.
+
+# Examples
+✅ `const isSold = property.status === "sold";`   // no comment needed
+✅ `// Special case: fallback when API returns empty array`  // allowed
+❌ `// set isSold to true if property is sold`       // unnecessary

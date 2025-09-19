@@ -1,0 +1,19 @@
+@use '../base' as *;
+
+.not-found {
+  @include flex(center, center, column, $spacing-xxl);
+
+  & {
+    margin-top: $spacing-xxxl;
+    margin-bottom: $spacing-xxxl;
+  }
+
+  h1 {
+    @include title($fs-display-sm, $fw-light, normal, 3.5rem);
+    text-align: center;
+  }
+
+  &__body {
+    @include flex(center, flex-end, column, $spacing-xxl);
+  }
+}

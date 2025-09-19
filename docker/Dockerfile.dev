@@ -1,0 +1,15 @@
+# Développement
+FROM node:22-slim AS dev
+
+WORKDIR /app
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN corepack enable
+COPY package.json yarn.lock .yarnrc.yml ./
+RUN yarn set version 4.6.0
+RUN yarn install --immutable
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["yarn", "run", "start:dev"]

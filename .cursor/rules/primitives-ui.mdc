@@ -1,0 +1,9 @@
+---
+description: "Use UI primitive components (Button, Input, Card, Badge, Breadcrumb, Dialog, etc.) from the src/app/_components/ui folder"
+alwaysApply: true
+---
+
+- For buttons, use `<Button variant="...">` instead of `<button className="...">`.
+- For inputs, use `<Input />`.
+- For badges, use `<Badge />`.
+- Never use generic divs for interactive components; always prefer the existing primitives.

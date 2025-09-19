@@ -1,0 +1,13 @@
+@use '../base' as *;
+
+.home {
+  height: 100%;
+
+  &__hero {
+    @include flex(center, center, column, $gap: $spacing-lg);
+
+    & {
+      height: 100%;
+    }
+  }
+}
