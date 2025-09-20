@@ -5,7 +5,13 @@
  */
 
 /* Primary Colors */
-$c-primary: #000000;
+$c-primary-darkest: #174f4a;
+$c-primary-darker: #257e77;
+$c-primary-dark: #32aea4;
+$c-primary: #51cdbe;
+$c-primary-light: #81dad3;
+$c-primary-lighter: #b0e8e3;
+$c-primary-lightest: #effaf9;
 
 /* Secondary Colors */
 $c-secondary: #a1a1a1;
@@ -44,10 +50,10 @@ $base-bg-color: $c-white;
  ** ====================================================
  */
 
-$ff-gotham: var(--font-family-gotham), sans-serif;
+$ff-nunito-sans: var(--font-family-nunito-sans), sans-serif;
 
-$ff-primary: $ff-gotham, sans-serif;
-$ff-secondary: serif;
+$ff-primary: $ff-nunito-sans, sans-serif;
+$ff-secondary: $ff-nunito-sans, sans-serif;
 
 $base-font-family: $ff-primary, sans-serif;
 

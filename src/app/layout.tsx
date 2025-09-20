@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next';
+
 import { ReactNode } from 'react';
 
 import Layout from '@/app/_components/layout';
-import '@/styles/layout/index.scss';
 
 import { APP_URL } from '@/utils/constants/config';
-import { Gotham } from '@/utils/fonts';
+import { nunitoSans } from '@/utils/fonts';
 import { ReactQueryProvider } from '@/utils/providers/ReactQueryProvider';
 
 export const revalidate = 300; // 5 minutes
@@ -14,9 +14,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(APP_URL!),
     title: {
-      default: 'Template',
-      template: `%s | Template`,
+      default: 'Dockili',
+      template: `%s | Dockili`,
     },
+    description:
+      '🐋🎉 Manage your Docker images very easily, from a modern and easy to use interface.',
     robots: {
       index: true,
       follow: true,
@@ -56,7 +58,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='fr'>
-      <body className={`${Gotham.variable}`}>
+      <body className={`${nunitoSans.variable}`}>
         <ReactQueryProvider>
           <Layout>{children}</Layout>
         </ReactQueryProvider>

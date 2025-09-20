@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import Button from '../button';
-import styles from './pagination.module.scss';
+import './pagination.scss';
 
 interface PaginationProps extends React.ComponentProps<'nav'> {
   className?: string;
@@ -15,7 +15,7 @@ function Pagination({ className, ...props }: PaginationProps) {
       role='navigation'
       aria-label='pagination'
       data-slot='pagination'
-      className={clsx(styles.pagination, className)}
+      className={clsx('pagination', className)}
       {...props}
     />
   );
@@ -29,7 +29,7 @@ function PaginationContent({ className, ...props }: PaginationContentProps) {
   return (
     <ul
       data-slot='pagination-content'
-      className={clsx(styles.pagination__content, className)}
+      className={clsx('pagination__content', className)}
       {...props}
     />
   );
@@ -54,12 +54,12 @@ function PaginationItem({
       data-slot='pagination-item'
       data-active={isActive}
       aria-current={isActive ? 'page' : undefined}
-      className={clsx(styles.pagination__item, className)}
+      className={clsx('pagination__item', className)}
       {...props}
     >
       <Button
         variant={isActive ? 'primary' : variant}
-        className={styles.pagination__item__button}
+        className='pagination__item__button'
         disabled={disabled}
       >
         {props.children}
@@ -76,7 +76,7 @@ function PaginationLink({ className, ...props }: PaginationLinkProps) {
   return (
     <Link
       data-slot='pagination-link'
-      className={clsx(styles.pagination__link, className)}
+      className={clsx('pagination__link', className)}
       {...props}
     />
   );
@@ -93,10 +93,10 @@ function PaginationPrevious({ className, ...props }: PaginationPreviousProps) {
       <ChevronLeft size={16} />
       <PaginationLink
         aria-label='Page précédente'
-        className={clsx(styles.pagination__previous, className)}
+        className={clsx('pagination__previous', className)}
         {...props}
       >
-        <span className={styles.pagination__previous__text}>Précédent</span>
+        <span className='pagination__previous__text'>Précédent</span>
       </PaginationLink>
     </>
   );
@@ -112,10 +112,10 @@ function PaginationNext({ className, ...props }: PaginationNextProps) {
     <>
       <PaginationLink
         aria-label='Page suivante'
-        className={clsx(styles.pagination__next, className)}
+        className={clsx('pagination__next', className)}
         {...props}
       >
-        <span className={styles.pagination__next__text}>Suivant</span>
+        <span className='pagination__next__text'>Suivant</span>
       </PaginationLink>
       <ChevronRight size={16} />
     </>
@@ -131,10 +131,10 @@ function PaginationEllipsis({ className, ...props }: PaginationEllipsisProps) {
     <span
       aria-hidden
       data-slot='pagination-ellipsis'
-      className={clsx(styles.pagination__ellipsis, className)}
+      className={clsx('pagination__ellipsis', className)}
       {...props}
     >
-      <span className={styles.pagination__ellipsis__icon}>⋯</span>
+      <span className='pagination__ellipsis__icon'>⋯</span>
     </span>
   );
 }

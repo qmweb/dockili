@@ -1,0 +1,50 @@
+@use '../../../../styles/base/variables' as *;
+@use '../../../../styles/base/mixins' as *;
+
+.sidebarInset {
+  $self: &;
+
+  @include flex(flex-start, flex-start, column);
+
+  & {
+    flex: 1;
+    min-height: 100vh;
+    background-color: $c-white;
+    transition: margin-left 0.3s $ease-in-out;
+    padding: $spacing-md $spacing-regular;
+    padding-left: 0;
+  }
+
+  &__header {
+    @include flex(flex-start, center, row, $spacing-sm);
+
+    & {
+      height: 4rem;
+      padding: 0 $spacing-md;
+      border-bottom: 1px solid $c-grey-light;
+      background-color: $c-white;
+      flex-shrink: 0;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    @include flex(flex-start, flex-start, column, $spacing-md);
+
+    & {
+      flex: 1;
+      padding: $spacing-md;
+      overflow: auto;
+      width: 100%;
+    }
+  }
+
+  &__separator {
+    & {
+      width: 1px;
+      height: 1rem;
+      background-color: $c-grey-light;
+      margin-right: $spacing-sm;
+    }
+  }
+}

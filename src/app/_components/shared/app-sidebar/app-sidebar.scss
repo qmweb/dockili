@@ -1,0 +1,84 @@
+@use '../../../../styles/base/variables' as *;
+@use '../../../../styles/base/mixins' as *;
+
+.app-sidebar {
+  $self: &;
+
+  & {
+    height: 100vh;
+    overflow: hidden;
+    width: 18rem;
+  }
+
+  &__retry-button {
+    @include flex(center, center, row);
+
+    & {
+      width: 2rem;
+      height: 2rem;
+      background-color: transparent;
+      border: 1px solid $c-grey-light;
+      border-radius: $border-radius-sm;
+      color: $c-grey-dark;
+      cursor: pointer;
+      transition: all 0.2s $ease-in-out;
+      font-size: $fs-sm;
+
+      &:hover {
+        background-color: $c-grey-lighter;
+        color: $c-black;
+        border-color: $c-grey;
+      }
+
+      &:focus {
+        outline: none;
+        background-color: $c-grey-lighter;
+        color: $c-black;
+        border-color: $c-primary;
+      }
+    }
+  }
+
+  &__loading {
+    @include flex(center, center, column, $spacing-sm);
+
+    & {
+      padding: $spacing-md;
+      text-align: center;
+    }
+
+    &__spinner {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid $c-grey-light;
+      border-top: 2px solid $c-primary;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  &__error {
+    @include flex(flex-start, flex-start, column, $spacing-sm);
+
+    & {
+      padding: $spacing-md;
+      color: $c-danger;
+      font-size: $fs-sm;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+}
+
+// Spinner animation
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

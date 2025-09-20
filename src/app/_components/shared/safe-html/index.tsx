@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import DOMPurify from 'dompurify';
 import { useEffect, useState } from 'react';
-import styles from './safe-html.module.scss';
+import './safe-html.scss';
 
 interface SafeHtmlProps {
   htmlContent: string;
@@ -25,8 +25,8 @@ const SafeHtml = ({
   }, [htmlContent]);
 
   const containerClassName = clsx(
-    styles.safeHtml,
-    styles[`safeHtml--${variant}`],
+    'safeHtml',
+    `safeHtml--${variant}`,
     className,
   );
 

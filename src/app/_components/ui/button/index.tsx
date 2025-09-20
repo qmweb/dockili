@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import styles from './button.module.scss';
+import './button.scss';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -28,9 +28,9 @@ const Button = ({
   ...props
 }: React.ComponentProps<'button'> & ButtonProps) => {
   const buttonClassName = clsx(
-    styles.button,
-    styles[`button--${variant}`],
-    styles[`button--${size}`],
+    'button',
+    `button--${variant}`,
+    `button--${size}`,
     className,
   );
 
@@ -42,15 +42,15 @@ const Button = ({
       {...props}
     >
       {loading && (
-        <span className={styles['button__spinner']}>
+        <span className='button__spinner'>
           <svg
-            className={styles['button__spinner__svg']}
+            className='button__spinner__svg'
             viewBox='0 0 24 24'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
           >
             <circle
-              className={styles['button__spinner__circle']}
+              className='button__spinner__circle'
               cx='12'
               cy='12'
               r='10'

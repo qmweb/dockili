@@ -3,7 +3,7 @@
 import { Truncate } from '@re-dev/react-truncate';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import styles from './truncate-text.module.scss';
+import './truncate-text.scss';
 
 interface TruncateTextProps {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ const TruncateText = ({
   const [isTruncated, setIsTruncated] = useState(false);
 
   const containerClassName = clsx(
-    styles.truncateText,
-    styles[`truncateText--${variant}`],
+    'truncateText',
+    `truncateText--${variant}`,
     className,
   );
 
@@ -34,11 +34,11 @@ const TruncateText = ({
         onTruncate={(truncated) => {
           setIsTruncated(truncated);
         }}
-        className={styles.content}
+        className='content'
         {...props}
       >
         <div
-          className={styles.truncatedContent}
+          className='truncatedContent'
           style={{ display: isTruncated ? 'block' : 'none' }}
         >
           {children}

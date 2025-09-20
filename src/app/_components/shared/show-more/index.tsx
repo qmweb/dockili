@@ -4,7 +4,7 @@ import { ShowMore as ShowMoreReactTruncate } from '@re-dev/react-truncate';
 import clsx from 'clsx';
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import styles from './show-more.module.scss';
+import './show-more.scss';
 
 interface ShowMoreProps {
   children: React.ReactNode;
@@ -27,8 +27,8 @@ const ShowMore = ({
   });
 
   const containerClassName = clsx(
-    styles.showMore,
-    styles[`showMore--${variant}`],
+    'showMore',
+    `showMore--${variant}`,
     className,
   );
 
@@ -36,7 +36,7 @@ const ShowMore = ({
     <div className={containerClassName}>
       <ShowMoreReactTruncate
         lines={mediaQuery ? (isUnderMediaQuery ? lines : 0) : lines}
-        className={styles.content}
+        className='content'
         {...props}
       >
         {children}

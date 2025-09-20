@@ -3,7 +3,7 @@
 import { Modal, ModalProps } from 'antd';
 import clsx from 'clsx';
 import { useState } from 'react';
-import styles from './dialog.module.scss';
+import './dialog.scss';
 
 interface DialogProps extends Omit<ModalProps, 'open' | 'onOk' | 'footer'> {
   children: React.ReactNode;
@@ -21,11 +21,7 @@ const Dialog = ({
   className,
   ...props
 }: DialogProps) => {
-  const dialogClassName = clsx(
-    styles.dialog,
-    styles[`dialog--${variant}`],
-    className,
-  );
+  const dialogClassName = clsx('dialog', `dialog--${variant}`, className);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -38,7 +34,7 @@ const Dialog = ({
 
   return (
     <>
-      <div onClick={showModal} className={styles.trigger}>
+      <div onClick={showModal} className='trigger'>
         {trigger}
       </div>
       <Modal
@@ -46,7 +42,7 @@ const Dialog = ({
         open={isModalOpen}
         onOk={handleOk}
         footer={
-          <div onClick={handleOk} className={styles.footer}>
+          <div onClick={handleOk} className='footer'>
             {footer}
           </div>
         }

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import styles from './badge.module.scss';
+import './badge.scss';
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
@@ -24,9 +24,9 @@ const Badge = ({
   ...props
 }: BadgeProps) => {
   const badgeClassName = clsx(
-    styles.badge,
-    styles[`badge--${variant}`],
-    styles[`badge--${size}`],
+    'badge',
+    `badge--${variant}`,
+    `badge--${size}`,
     className,
   );
 

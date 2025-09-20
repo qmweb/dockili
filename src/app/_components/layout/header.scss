@@ -1,0 +1,5 @@
+@use '../../../styles/base' as *;
+
+.header {
+  @include flex(flex-start, center, row, $spacing-sm);
+}

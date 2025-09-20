@@ -1,0 +1,11 @@
+@use '../base/mixins' as *;
+@use '../base/variables' as *;
+
+.image-page {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.image-page__container {
+  padding: $spacing-xl $spacing-regular-sm;
+}
