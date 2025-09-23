@@ -3,7 +3,6 @@
 import clsx from 'clsx';
 import { PanelLeft } from 'lucide-react';
 import React, { createContext, useContext, useState } from 'react';
-import './sidebar-inset.scss';
 import './sidebar.scss';
 
 // Sidebar Context
@@ -62,13 +61,7 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultCollapsed?: boolean;
 }
 
-const Sidebar = ({
-  children,
-  collapsible: _collapsible = false,
-  defaultCollapsed: _defaultCollapsed = false,
-  className,
-  ...props
-}: SidebarProps) => {
+const Sidebar = ({ children, className, ...props }: SidebarProps) => {
   const { isOpen, isCollapsed } = useSidebar();
 
   return (
@@ -192,15 +185,24 @@ const SidebarMenu = ({ children, className, ...props }: SidebarMenuProps) => {
 // Sidebar Menu Item
 interface SidebarMenuItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
+  isActive?: boolean;
 }
 
 const SidebarMenuItem = ({
   children,
   className,
+  isActive = false,
   ...props
 }: SidebarMenuItemProps) => {
   return (
-    <li className={clsx('sidebar__menu__item', className)} {...props}>
+    <li
+      className={clsx(
+        'sidebar__menu__item',
+        isActive && 'sidebar__menu__item--active',
+        className,
+      )}
+      {...props}
+    >
       {children}
     </li>
   );
@@ -211,32 +213,28 @@ interface SidebarMenuButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   asChild?: boolean;
-  isActive?: boolean;
 }
 
 const SidebarMenuButton = ({
   children,
   asChild = false,
-  isActive = false,
   className,
   ...props
 }: SidebarMenuButtonProps) => {
-  const buttonClassName = clsx(
-    'sidebar__menu__button',
-    isActive && 'sidebar__menu__button--active',
-    className,
-  );
+  const buttonClassName = clsx('sidebar__menu__button', className);
 
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children, {
-      className: clsx(buttonClassName, children.props.className),
-      'data-active': isActive,
+      className: clsx(
+        buttonClassName,
+        (children.props as unknown as { className: string })?.className,
+      ),
       ...props,
-    });
+    } as unknown as React.ReactElement);
   }
 
   return (
-    <button className={buttonClassName} data-active={isActive} {...props}>
+    <button className={buttonClassName} {...props}>
       {children}
     </button>
   );
@@ -258,7 +256,7 @@ interface SidebarInsetProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const SidebarInset = ({ children, className, ...props }: SidebarInsetProps) => {
   return (
-    <div className={clsx('sidebarInset', className)} {...props}>
+    <div className={clsx('sidebar-inset', className)} {...props}>
       {children}
     </div>
   );

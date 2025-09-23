@@ -17,6 +17,8 @@
 
     & {
       position: relative;
+      padding-right: $spacing-sm;
+      padding-left: $spacing-sm;
     }
 
     &--hidden {
@@ -27,7 +29,7 @@
   }
 
   &__link {
-    @include text($fs-sm, $fw-regular, normal, 1.2, $c-grey-dark);
+    @include text($fs-regular-sm, $fw-medium, normal, 1, $c-grey-dark);
 
     & {
       text-decoration: none;
@@ -47,7 +49,7 @@
   }
 
   &__page {
-    @include text($fs-sm, $fw-medium, normal, 1.2, $c-black);
+    @include text($fs-regular-sm, $fw-medium, normal, 1, $c-grey-dark);
 
     & {
       color: $c-black;

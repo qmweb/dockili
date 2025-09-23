@@ -11,12 +11,12 @@
     top: 0;
     left: 0;
     z-index: 50;
-    min-width: 18rem;
+    width: 22rem;
     height: 100vh;
     background-color: $c-white;
     overflow: hidden;
     transition: width 0.3s $ease-in-out;
-    padding: $spacing-md $spacing-regular;
+    padding: $spacing-lg;
 
     @media (max-width: $bkp-l) {
       position: fixed;
@@ -32,23 +32,6 @@
     }
   }
 
-  &__header {
-    @include flex(flex-start, flex-start, column, $spacing-md);
-
-    & {
-      width: 100%;
-      border: 1px solid $c-primary-lightest;
-      border-radius: $border-radius-regular;
-      padding: $spacing-regular-sm;
-    }
-
-    h1 {
-      @include title($fs-regular, $fw-semibold, normal, 1.2, $c-primary-darker);
-      border-radius: $border-radius-regular;
-      text-transform: uppercase;
-    }
-  }
-
   &__content {
     @include flex(flex-start, flex-start, column, 0);
 
@@ -57,9 +40,10 @@
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: $spacing-md $spacing-regular-sm;
+      padding: $spacing-lg $spacing-md;
       border-radius: $border-radius-regular;
-      border: 1px solid $c-primary-lightest;
+      border: 1px solid $c-grey-lighter;
+      box-shadow: 0 0 10px 0 rgba($c-grey-lighter, 1);
     }
   }
 
@@ -70,26 +54,26 @@
       width: 100%;
       margin-bottom: $spacing-lg;
     }
-  }
 
-  &__group__label {
-    @include text($fs-sm, $fw-medium, normal, 1.2, $c-grey);
+    &__label {
+      @include text($fs-regular-sm, $fw-medium, normal, 1.2, $c-grey);
 
-    & {
-      padding: 0 $spacing-regular-sm $spacing-sm $spacing-regular-sm;
+      & {
+        padding: 0 $spacing-regular-sm $spacing-sm $spacing-regular-sm;
+      }
     }
-  }
 
-  &__group__content {
-    @include flex(flex-start, flex-start, column, 0);
+    &__content {
+      @include flex(flex-start, flex-start, column, 0);
 
-    & {
-      width: 100%;
+      & {
+        width: 100%;
+      }
     }
   }
 
   &__menu {
-    @include flex(flex-start, flex-start, column, $spacing-xxxs);
+    @include flex(flex-start, flex-start, column, $spacing-xs);
 
     & {
       list-style: none;
@@ -97,60 +81,51 @@
       padding: 0;
       width: 100%;
     }
-  }
 
-  &__menu__item {
-    & {
-      width: 100%;
-    }
-  }
+    &__item {
+      @include flex(flex-start, center, row, $spacing-sm);
 
-  &__menu__button {
-    @include flex(flex-start, center, row, $spacing-sm);
-
-    & {
-      width: 100%;
-      padding: $spacing-sm $spacing-regular-sm;
-      background-color: transparent;
-      border: none;
-      text-align: left;
-      border-radius: $border-radius-regular;
-      text-decoration: none;
-      color: $c-grey-dark;
-      font-size: $fs-regular-sm;
-      font-weight: $fw-regular;
-      line-height: 1.4;
-      cursor: pointer;
-      transition: all 0.2s $ease-in-out;
-
-      &:hover {
-        background-color: $c-grey-lighter;
-        color: $c-black;
-      }
-
-      &:focus {
-        outline: none;
-        background-color: $c-grey-lighter;
-        color: $c-black;
-      }
-
-      &[data-active='true'] {
-        background-color: $c-primary-lightest;
-        color: $c-primary-dark;
-        font-weight: $fw-medium;
-      }
-
-      // Ensure proper alignment for content with icons
-      a {
-        @include flex(flex-start, center, row, $spacing-sm);
+      & {
+        @include text($fs-regular, $fw-semibold, normal, 1.4, $c-grey-dark);
         width: 100%;
+        padding: $spacing-regular-sm $spacing-regular;
+        background-color: transparent;
+        border: none;
+        text-align: left;
+        border-radius: $border-radius-regular;
         text-decoration: none;
-        color: inherit;
+        cursor: pointer;
+        transition: all 0.2s $ease-in-out;
+
+        &:not(&--active):hover {
+          background-color: $c-grey-lighter;
+        }
+
+        &:not(&--active):focus {
+          outline: none;
+          background-color: $c-grey-lighter;
+        }
+
+        a {
+          @include flex(flex-start, center, row, $spacing-sm);
+          width: 100%;
+          text-decoration: none;
+          color: inherit;
+        }
       }
+
+      &--active {
+        background-color: $c-primary-lightest;
+        border-radius: $border-radius-regular;
+        color: $c-primary-dark;
+      }
+    }
+
+    &__button {
+      @include flex(flex-start, center, row, $spacing-sm);
     }
   }
 
-  // Collapsed state
   &--collapsed {
     width: 4rem;
 
@@ -172,7 +147,6 @@
     }
   }
 
-  // Mobile overlay
   &__overlay {
     & {
       position: fixed;
@@ -197,7 +171,6 @@
     }
   }
 
-  // Sidebar Trigger
   &__trigger {
     @include flex(center, center, row, 0);
 
@@ -228,6 +201,41 @@
         width: 1rem;
         height: 1rem;
       }
+    }
+  }
+}
+
+.sidebar-inset {
+  $self: &;
+
+  @include flex(flex-start, flex-start, column);
+
+  & {
+    flex: 1;
+    min-height: 100vh;
+    background-color: $c-white;
+    transition: margin-left 0.3s $ease-in-out;
+    padding: $spacing-md $spacing-regular;
+    padding-left: 0;
+  }
+
+  &__content {
+    @include flex(flex-start, flex-start, column, $spacing-md);
+
+    & {
+      flex: 1;
+      padding: $spacing-md;
+      overflow: auto;
+      width: 100%;
+    }
+  }
+
+  &__separator {
+    & {
+      width: 1px;
+      height: 1rem;
+      background-color: $c-grey-light;
+      margin-right: $spacing-sm;
     }
   }
 }

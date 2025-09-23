@@ -18,7 +18,14 @@ class RegistryService {
 
   private initializeConfig() {
     if (!validateRegistryConfig()) {
-      throw new Error('Missing required Docker registry configuration');
+      throw new Error(
+        'Missing required Docker registry configuration:' +
+          process.env.REGISTRY_URL +
+          ' ' +
+          process.env.REGISTRY_USERNAME +
+          ' ' +
+          process.env.REGISTRY_PASSWORD,
+      );
     }
 
     if (!this.baseUrl || !this.auth) {
@@ -62,6 +69,91 @@ class RegistryService {
         throw new Error(`Registry request failed: ${error.message}`);
       }
       throw new Error('Unknown error occurred while connecting to registry');
+    }
+  }
+
+  private async makeDeleteRequest(endpoint: string): Promise<void> {
+    this.initializeConfig();
+
+    try {
+      await axios.delete(`${this.baseUrl}${endpoint}`, {
+        headers: {
+          Authorization: `Basic ${this.auth}`,
+          Accept: 'application/json',
+        },
+        timeout: 10000, // 10 second timeout for delete operations
+      });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          throw new Error('Authentication failed: Invalid credentials');
+        }
+        if (error.response?.status === 403) {
+          throw new Error('Access forbidden: Insufficient permissions');
+        }
+        if (error.response?.status === 404) {
+          throw new Error('Tag not found or already deleted');
+        }
+        if (error.response?.status === 405) {
+          throw new Error('Delete operation not supported by registry');
+        }
+        if (error.code === 'ECONNABORTED') {
+          throw new Error('Registry request failed: timeout exceeded');
+        }
+        throw new Error(`Delete request failed: ${error.message}`);
+      }
+      throw new Error('Unknown error occurred while deleting from registry');
+    }
+  }
+
+  private async getManifestDigest(
+    repositoryName: string,
+    tag: string,
+  ): Promise<string> {
+    this.initializeConfig();
+
+    try {
+      const response = await axios.head(
+        `${this.baseUrl}/v2/${repositoryName}/manifests/${tag}`,
+        {
+          headers: {
+            Authorization: `Basic ${this.auth}`,
+            Accept: 'application/vnd.docker.distribution.manifest.v2+json',
+          },
+          timeout: 5000,
+        },
+      );
+
+      console.log('Manifest HEAD response headers:', response.headers);
+
+      const digest = response.headers['docker-content-digest'];
+      console.log('Extracted digest:', digest);
+
+      if (!digest) {
+        // Try alternative header names
+        const altDigest =
+          response.headers['Docker-Content-Digest'] ||
+          response.headers['content-digest'] ||
+          response.headers['digest'];
+        console.log('Alternative digest:', altDigest);
+
+        if (altDigest) {
+          return altDigest;
+        }
+
+        throw new Error('Unable to get manifest digest from registry');
+      }
+
+      return digest;
+    } catch (error) {
+      console.error('Error getting manifest digest:', error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          throw new Error('Tag not found');
+        }
+        throw new Error(`Failed to get manifest digest: ${error.message}`);
+      }
+      throw new Error('Unknown error occurred while getting manifest digest');
     }
   }
 
@@ -273,6 +365,68 @@ class RegistryService {
       console.error('Failed to fetch repositories with tags:', error);
       throw error;
     }
+  }
+
+  async deleteTag(repositoryName: string, tag: string): Promise<void> {
+    try {
+      console.log(`Attempting to delete tag: ${repositoryName}:${tag}`);
+
+      // Always try v2 API first, regardless of manifest schema version
+      // Many registries use v2 API even with v1 manifests
+      console.log('Trying v2 deletion method first...');
+
+      try {
+        // Try deleting by tag first (some registries support this)
+        console.log('Trying to delete by tag first...');
+        await this.makeDeleteRequest(`/v2/${repositoryName}/manifests/${tag}`);
+        console.log('Successfully deleted by tag');
+        return;
+      } catch (tagDeleteError) {
+        console.log(
+          'Delete by tag failed, trying with digest:',
+          tagDeleteError,
+        );
+
+        // If that fails, get the manifest digest from the registry headers
+        const digest = await this.getManifestDigest(repositoryName, tag);
+        console.log('Got digest for deletion:', digest);
+
+        // Delete the manifest by digest
+        await this.makeDeleteRequest(
+          `/v2/${repositoryName}/manifests/${digest}`,
+        );
+        console.log('Successfully deleted by digest');
+      }
+    } catch (error) {
+      console.error(`Failed to delete tag ${repositoryName}:${tag}:`, error);
+      throw error;
+    }
+  }
+
+  async deleteTags(
+    repositoryName: string,
+    tags: string[],
+  ): Promise<{ success: string[]; failed: { tag: string; error: string }[] }> {
+    const results = {
+      success: [] as string[],
+      failed: [] as { tag: string; error: string }[],
+    };
+
+    // Process deletions in parallel for better performance
+    const deletionPromises = tags.map(async (tag) => {
+      try {
+        await this.deleteTag(repositoryName, tag);
+        results.success.push(tag);
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : 'Unknown error';
+        results.failed.push({ tag, error: errorMessage });
+      }
+    });
+
+    await Promise.all(deletionPromises);
+
+    return results;
   }
 }
 

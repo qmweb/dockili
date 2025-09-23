@@ -1,10 +1,17 @@
 'use client';
 
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
+import { ArrowUpRightIcon, MoreVertical, Trash2 } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import './app-sidebar.scss';
 
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -18,6 +25,7 @@ import {
   SidebarImage,
   SidebarMenuItem as SidebarMenuItemType,
 } from '@/utils/types/registry.interface';
+import { toast } from 'sonner';
 import { SidebarIcon } from './sidebar-icon';
 import { useSidebarMenu } from './use-sidebar-menu';
 
@@ -28,6 +36,7 @@ interface AppSidebarProps {
 export function AppSidebar({ className }: AppSidebarProps) {
   const { menuData, isLoading, error, refetch } = useSidebarMenu();
   const pathname = usePathname();
+  const router = useRouter();
 
   const isActiveUrl = (url: string): boolean => {
     // Handle dashboard/home page
@@ -56,15 +65,45 @@ export function AppSidebar({ className }: AppSidebarProps) {
     return isActiveUrl(subItem.url);
   };
 
+  const handleDeleteImage = () => {
+    toast.info('Deleting images is not implemented yet');
+  };
+
+  const handleSeeImage = (imageUrl: string) => {
+    router.push(imageUrl);
+  };
+
   const renderMenuItems = (items: SidebarImage[]) => {
     return items.map((subItem) => (
-      <SidebarMenuItem key={subItem.title}>
-        <SidebarMenuButton asChild isActive={isSubItemActive(subItem)}>
+      <SidebarMenuItem
+        key={subItem.title}
+        isActive={isSubItemActive(subItem)}
+        className='app-sidebar__menu-item'
+      >
+        <SidebarMenuButton asChild>
           <a href={subItem.url}>
             {subItem.icon && <SidebarIcon iconName={subItem.icon} />}
             {subItem.title}
           </a>
         </SidebarMenuButton>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className='app-sidebar__actions'>
+              <MoreVertical size={16} />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='start' sideOffset={10} side='right'>
+            <DropdownMenuItem onClick={() => handleSeeImage(subItem.url)}>
+              <ArrowUpRightIcon size={16} />
+              See
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDeleteImage}>
+              <Trash2 size={16} />
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </SidebarMenuItem>
     ));
   };
@@ -77,8 +116,8 @@ export function AppSidebar({ className }: AppSidebarProps) {
             <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={isActiveUrl('/')}>
+                <SidebarMenuItem isActive={isActiveUrl('/')}>
+                  <SidebarMenuButton asChild>
                     <a href='/'>
                       <SidebarIcon iconName='LayoutDashboard' />
                       Dashboard
@@ -91,16 +130,23 @@ export function AppSidebar({ className }: AppSidebarProps) {
 
           {isLoading ? (
             <SidebarGroup>
-              <SidebarGroupLabel>Loading...</SidebarGroupLabel>
+              <SidebarGroupLabel>Images</SidebarGroupLabel>
               <SidebarGroupContent>
-                <div className='app-sidebar__loading'>
-                  <div className='app-sidebar__loading__spinner'></div>
-                </div>
+                <SidebarMenu>
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <SidebarMenuItem key={index}>
+                      <SidebarMenuButton asChild>
+                        <SidebarIcon iconName='Package' />
+                        <Skeleton height={16} width={120} />
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
           ) : error ? (
             <SidebarGroup>
-              <SidebarGroupLabel>Error</SidebarGroupLabel>
+              <SidebarGroupLabel>Images</SidebarGroupLabel>
               <SidebarGroupContent>
                 <div className='app-sidebar__error'>
                   <p>Failed to load images: {error}</p>
@@ -122,11 +168,8 @@ export function AppSidebar({ className }: AppSidebarProps) {
                     {item.items ? (
                       renderMenuItems(item.items)
                     ) : (
-                      <SidebarMenuItem>
-                        <SidebarMenuButton
-                          asChild
-                          isActive={isMenuItemActive(item)}
-                        >
+                      <SidebarMenuItem isActive={isMenuItemActive(item)}>
+                        <SidebarMenuButton asChild>
                           <a href={item.url}>
                             {item.icon && <SidebarIcon iconName={item.icon} />}
                             {item.title}

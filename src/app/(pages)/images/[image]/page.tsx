@@ -1,9 +1,11 @@
 import { registryService } from '@/features/registry';
 import '@/styles/pages/image.scss';
-import { RegistryRepositoriesResponse } from '@/utils/types/registry.interface';
+import {
+  RegistryRepositoriesResponse,
+  Repository,
+} from '@/utils/types/registry.interface';
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import ImageDetails from './_components/image-details';
+import ImageDetailsWrapper from './_components/image-details-wrapper';
 
 interface ImagePageProps {
   params: {
@@ -38,20 +40,20 @@ export default async function ImagePage({ params }: ImagePageProps) {
   }
 
   // Find the specific repository
+  const emptyRepository = {
+    name: imageName,
+    tags: [],
+  } as Repository;
   const repository = repositoriesData.repositories.find(
     (repo) => repo.name === imageName,
   );
 
-  if (!repository && !error) {
-    notFound();
-  }
-
   return (
     <main className='image-page'>
       <div className='image-page__container'>
-        <ImageDetails
-          repository={repository}
-          error={error}
+        <ImageDetailsWrapper
+          initialRepository={repository || emptyRepository}
+          initialError={error}
           imageName={imageName}
         />
       </div>

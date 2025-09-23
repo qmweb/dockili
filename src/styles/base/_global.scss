@@ -72,6 +72,15 @@ body {
   min-height: 100vh;
 }
 
+/* Chart color variables */
+:root {
+  --chart-1: #{$c-chart-1};
+  --chart-2: #{$c-chart-2};
+  --chart-3: #{$c-chart-3};
+  --chart-4: #{$c-chart-4};
+  --chart-5: #{$c-chart-5};
+}
+
 * {
   line-height: 1;
 }

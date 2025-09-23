@@ -8,6 +8,45 @@ export {
   BreadcrumbSeparator,
 } from './breadcrumb';
 export { default as Button } from './button';
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './card';
+export { ChartContainer, ChartTooltip, ChartTooltipContent } from './chart';
+export { Checkbox } from './checkbox';
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from './dialog';
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from './dropdown-menu';
 export { default as Input } from './input';
 export {
   Pagination,
@@ -34,3 +73,4 @@ export {
   SidebarRail,
   SidebarTrigger,
 } from './sidebar';
+export { Table } from './table';

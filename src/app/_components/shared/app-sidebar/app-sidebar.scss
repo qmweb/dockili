@@ -7,7 +7,25 @@
   & {
     height: 100vh;
     overflow: hidden;
-    width: 18rem;
+    width: 22rem;
+  }
+
+  &__actions {
+    opacity: 0;
+    transition: opacity 0.2s $ease-in-out;
+
+    &,
+    * {
+      cursor: pointer;
+    }
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  &__menu-item:hover &__actions {
+    opacity: 1;
   }
 
   &__retry-button {
@@ -39,24 +57,6 @@
     }
   }
 
-  &__loading {
-    @include flex(center, center, column, $spacing-sm);
-
-    & {
-      padding: $spacing-md;
-      text-align: center;
-    }
-
-    &__spinner {
-      width: 1.5rem;
-      height: 1.5rem;
-      border: 2px solid $c-grey-light;
-      border-top: 2px solid $c-primary;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-  }
-
   &__error {
     @include flex(flex-start, flex-start, column, $spacing-sm);
 
@@ -70,15 +70,5 @@
       margin: 0;
       line-height: 1.4;
     }
-  }
-}
-
-// Spinner animation
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }

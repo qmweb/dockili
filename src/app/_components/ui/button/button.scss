@@ -6,9 +6,10 @@
   @include flex(center, center, row, $spacing-sm);
 
   & {
+    @include text($fs-sm, $fw-semibold, $color: $c-black);
     position: relative;
     white-space: nowrap;
-    border-radius: $border-radius-sm;
+    border-radius: $border-radius-regular;
 
     &,
     * {
@@ -57,7 +58,7 @@
       color: $c-white;
     }
 
-    background-color: $c-primary;
+    background-color: $c-primary-dark;
   }
 
   &--secondary {
@@ -90,7 +91,7 @@
 
     &:hover,
     &:focus {
-      background-color: $c-grey-light;
+      background-color: $c-grey-lighter;
     }
   }
 

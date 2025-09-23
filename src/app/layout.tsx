@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 
 import { ReactNode } from 'react';
+import { Toaster } from 'sonner';
 
 import Layout from '@/app/_components/layout';
 
@@ -14,8 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(APP_URL!),
     title: {
-      default: 'Dockili',
-      template: `%s | Dockili`,
+      default: 'Dokistry',
+      template: `%s | Dokistry`,
     },
     description:
       '🐋🎉 Manage your Docker images very easily, from a modern and easy to use interface.',
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={`${nunitoSans.variable}`}>
         <ReactQueryProvider>
           <Layout>{children}</Layout>
+          <Toaster position='top-right' richColors />
         </ReactQueryProvider>
       </body>
     </html>

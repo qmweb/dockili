@@ -2,4 +2,7 @@
 
 .header {
   @include flex(flex-start, center, row, $spacing-sm);
+  width: 100%;
+  padding-top: $spacing-lg;
+  padding-bottom: $spacing-lg;
 }

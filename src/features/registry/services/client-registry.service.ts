@@ -15,7 +15,7 @@ class ClientRegistryService {
         try {
           const errorData = await response.json();
           errorMessage = errorData.message || errorMessage;
-        } catch (jsonError) {
+        } catch {
           // If response is not JSON, try to get text
           try {
             const textResponse = await response.text();
@@ -78,12 +78,6 @@ class ClientRegistryService {
       // Return fallback menu structure in case of error
       return {
         navMain: [
-          {
-            title: 'Dashboard',
-            url: '#/dashboard',
-            isActive: true,
-            icon: 'LayoutDashboard',
-          },
           {
             title: 'Images',
             url: '#/images',
