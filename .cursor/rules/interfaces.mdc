@@ -1,0 +1,38 @@
+---
+alwaysApply: true
+---
+# Guidelines for Interfaces & Types
+
+1. **Location**
+   - All `interface` and `type` definitions must be stored in:  
+     ```
+     src/utils/types/
+     ```
+
+2. **Naming convention**
+   - Files must use **kebab-case** and end with `.interface.ts`.  
+   - Examples:  
+     ✅ `registry.interface.ts`  
+     ✅ `better-auth.interface.ts`  
+     ❌ `User.ts`  
+     ❌ `types.ts`
+
+3. **Separation of concerns**
+   - Each file should group only **related** interfaces/types.  
+   - Do not mix unrelated domains into the same file.  
+   - Example:  
+     - `registry.interface.ts` → Registry-related types  
+     - `better-auth.interface.ts` → BetterAuth-related types
+
+4. **Cursor enforcement**
+   - When generating or refactoring code, **always create or update interfaces in `src/utils/types/`**.  
+   - Never place `interface` or `type` definitions inline inside components or other modules.  
+   - Always follow the `<domain>.interface.ts` convention.
+
+# Examples
+✅ `src/utils/types/registry.interface.ts`  
+✅ `src/utils/types/directus.interface.ts`  
+✅ `src/utils/types/better-auth.interface.ts`  
+❌ `src/types.ts`  
+❌ `interfaces.ts`  
+❌ `User.ts`  

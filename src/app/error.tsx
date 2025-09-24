@@ -1,18 +1,17 @@
-'use client';
+"use client"
 
-import type { Metadata } from 'next';
+import type { Metadata } from "next"
 
-import '@/styles/pages/error.scss';
-import { redirect } from 'next/navigation';
+import "@/styles/pages/error.scss"
 
 export const metadata: Metadata = {
-  title: 'Erreur',
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+	title: "Erreur",
+	robots: {
+		index: false,
+		follow: false,
+	},
+}
 
 export default function Error() {
-  redirect('/');
+	// redirect('/');
 }

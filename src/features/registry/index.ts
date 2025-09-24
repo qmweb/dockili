@@ -1,1 +1,1 @@
-export { registryService } from './services';
+export { registryService } from "./services"

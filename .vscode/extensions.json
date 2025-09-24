@@ -1,17 +1,15 @@
 {
   "recommendations": [
     "christian-kohler.path-intellisense",
-    "dbaeumer.vscode-eslint",
     "dsznajder.es7-react-js-snippets",
-    "esbenp.prettier-vscode",
     "formulahendry.auto-close-tag",
     "formulahendry.auto-rename-tag",
     "jock.svg",
     "meganrogge.template-string-converter",
     "mrmlnc.vscode-scss",
-    "rvest.vs-code-prettier-eslint",
     "steoates.autoimport",
     "syler.sass-indented",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "biomejs.biome"
   ]
 }

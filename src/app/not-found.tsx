@@ -1,16 +1,15 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next"
 
-import '@/styles/pages/not-found.scss';
-import { redirect } from 'next/navigation';
+import "@/styles/pages/not-found.scss"
 
 export const metadata: Metadata = {
-  title: 'Erreur 404',
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+	title: "Erreur 404",
+	robots: {
+		index: false,
+		follow: false,
+	},
+}
 
 export default function NotFound() {
-  redirect('/');
+	// redirect('/');
 }

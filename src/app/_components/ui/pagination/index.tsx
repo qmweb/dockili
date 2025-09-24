@@ -1,150 +1,143 @@
-import clsx from 'clsx';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
-import Button from '../button';
-import './pagination.scss';
+import clsx from "clsx"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link"
+import type React from "react"
+import Button from "../button"
+import "./pagination.scss"
 
-interface PaginationProps extends React.ComponentProps<'nav'> {
-  className?: string;
+interface PaginationProps extends React.ComponentProps<"nav"> {
+	className?: string
 }
 
 function Pagination({ className, ...props }: PaginationProps) {
-  return (
-    <nav
-      role='navigation'
-      aria-label='pagination'
-      data-slot='pagination'
-      className={clsx('pagination', className)}
-      {...props}
-    />
-  );
+	return (
+		<nav
+			aria-label="pagination"
+			data-slot="pagination"
+			className={clsx("pagination", className)}
+			{...props}
+		/>
+	)
 }
 
-interface PaginationContentProps extends React.ComponentProps<'ul'> {
-  className?: string;
+interface PaginationContentProps extends React.ComponentProps<"ul"> {
+	className?: string
 }
 
 function PaginationContent({ className, ...props }: PaginationContentProps) {
-  return (
-    <ul
-      data-slot='pagination-content'
-      className={clsx('pagination__content', className)}
-      {...props}
-    />
-  );
+	return (
+		<ul
+			data-slot="pagination-content"
+			className={clsx("pagination__content", className)}
+			{...props}
+		/>
+	)
 }
 
-interface PaginationItemProps extends React.ComponentProps<'li'> {
-  className?: string;
-  isActive?: boolean;
-  variant?: 'ghost' | 'primary';
-  disabled?: boolean;
+interface PaginationItemProps extends React.ComponentProps<"li"> {
+	className?: string
+	isActive?: boolean
+	variant?: "ghost" | "primary"
+	disabled?: boolean
 }
 
 function PaginationItem({
-  className,
-  isActive = false,
-  variant = 'ghost',
-  disabled = false,
-  ...props
+	className,
+	isActive = false,
+	variant = "ghost",
+	disabled = false,
+	...props
 }: PaginationItemProps) {
-  return (
-    <li
-      data-slot='pagination-item'
-      data-active={isActive}
-      aria-current={isActive ? 'page' : undefined}
-      className={clsx('pagination__item', className)}
-      {...props}
-    >
-      <Button
-        variant={isActive ? 'primary' : variant}
-        className='pagination__item__button'
-        disabled={disabled}
-      >
-        {props.children}
-      </Button>
-    </li>
-  );
+	return (
+		<li
+			data-slot="pagination-item"
+			data-active={isActive}
+			aria-current={isActive ? "page" : undefined}
+			className={clsx("pagination__item", className)}
+			{...props}
+		>
+			<Button
+				variant={isActive ? "primary" : variant}
+				className="pagination__item__button"
+				disabled={disabled}
+			>
+				{props.children}
+			</Button>
+		</li>
+	)
 }
 
 interface PaginationLinkProps extends React.ComponentProps<typeof Link> {
-  className?: string;
+	className?: string
 }
 
 function PaginationLink({ className, ...props }: PaginationLinkProps) {
-  return (
-    <Link
-      data-slot='pagination-link'
-      className={clsx('pagination__link', className)}
-      {...props}
-    />
-  );
+	return (
+		<Link data-slot="pagination-link" className={clsx("pagination__link", className)} {...props} />
+	)
 }
 
-interface PaginationPreviousProps
-  extends React.ComponentProps<typeof PaginationLink> {
-  className?: string;
+interface PaginationPreviousProps extends React.ComponentProps<typeof PaginationLink> {
+	className?: string
 }
 
 function PaginationPrevious({ className, ...props }: PaginationPreviousProps) {
-  return (
-    <>
-      <ChevronLeft size={16} />
-      <PaginationLink
-        aria-label='Page précédente'
-        className={clsx('pagination__previous', className)}
-        {...props}
-      >
-        <span className='pagination__previous__text'>Précédent</span>
-      </PaginationLink>
-    </>
-  );
+	return (
+		<>
+			<ChevronLeft size={16} />
+			<PaginationLink
+				aria-label="Page précédente"
+				className={clsx("pagination__previous", className)}
+				{...props}
+			>
+				<span className="pagination__previous__text">Précédent</span>
+			</PaginationLink>
+		</>
+	)
 }
 
-interface PaginationNextProps
-  extends React.ComponentProps<typeof PaginationLink> {
-  className?: string;
+interface PaginationNextProps extends React.ComponentProps<typeof PaginationLink> {
+	className?: string
 }
 
 function PaginationNext({ className, ...props }: PaginationNextProps) {
-  return (
-    <>
-      <PaginationLink
-        aria-label='Page suivante'
-        className={clsx('pagination__next', className)}
-        {...props}
-      >
-        <span className='pagination__next__text'>Suivant</span>
-      </PaginationLink>
-      <ChevronRight size={16} />
-    </>
-  );
+	return (
+		<>
+			<PaginationLink
+				aria-label="Page suivante"
+				className={clsx("pagination__next", className)}
+				{...props}
+			>
+				<span className="pagination__next__text">Suivant</span>
+			</PaginationLink>
+			<ChevronRight size={16} />
+		</>
+	)
 }
 
-interface PaginationEllipsisProps extends React.ComponentProps<'span'> {
-  className?: string;
+interface PaginationEllipsisProps extends React.ComponentProps<"span"> {
+	className?: string
 }
 
 function PaginationEllipsis({ className, ...props }: PaginationEllipsisProps) {
-  return (
-    <span
-      aria-hidden
-      data-slot='pagination-ellipsis'
-      className={clsx('pagination__ellipsis', className)}
-      {...props}
-    >
-      <span className='pagination__ellipsis__icon'>⋯</span>
-    </span>
-  );
+	return (
+		<span
+			aria-hidden
+			data-slot="pagination-ellipsis"
+			className={clsx("pagination__ellipsis", className)}
+			{...props}
+		>
+			<span className="pagination__ellipsis__icon">⋯</span>
+		</span>
+	)
 }
 
 export {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-};
+	Pagination,
+	PaginationContent,
+	PaginationEllipsis,
+	PaginationItem,
+	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
+}

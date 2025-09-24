@@ -10,21 +10,21 @@
  * }
  */
 export const copyToClipboard = async (text: string): Promise<boolean> => {
-  try {
-    // Check if the Clipboard API is available
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } else {
-      // Fallback for older browsers or non-secure contexts
-      return fallbackCopyToClipboard(text);
-    }
-  } catch (error) {
-    console.error('Failed to copy text to clipboard:', error);
-    // Try fallback method
-    return fallbackCopyToClipboard(text);
-  }
-};
+	try {
+		// Check if the Clipboard API is available
+		if (navigator.clipboard && window.isSecureContext) {
+			await navigator.clipboard.writeText(text)
+			return true
+		} else {
+			// Fallback for older browsers or non-secure contexts
+			return fallbackCopyToClipboard(text)
+		}
+	} catch (error) {
+		console.error("Failed to copy text to clipboard:", error)
+		// Try fallback method
+		return fallbackCopyToClipboard(text)
+	}
+}
 
 /**
  * Fallback method for copying text to clipboard
@@ -34,32 +34,32 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
  * @returns boolean - Returns true if successful, false otherwise
  */
 const fallbackCopyToClipboard = (text: string): boolean => {
-  try {
-    // Create a temporary textarea element
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
+	try {
+		// Create a temporary textarea element
+		const textArea = document.createElement("textarea")
+		textArea.value = text
 
-    // Make the textarea invisible
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
-    textArea.style.top = '-999999px';
+		// Make the textarea invisible
+		textArea.style.position = "fixed"
+		textArea.style.left = "-999999px"
+		textArea.style.top = "-999999px"
 
-    // Add to DOM, select, and copy
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
+		// Add to DOM, select, and copy
+		document.body.appendChild(textArea)
+		textArea.focus()
+		textArea.select()
 
-    const successful = document.execCommand('copy');
+		const successful = document.execCommand("copy")
 
-    // Clean up
-    document.body.removeChild(textArea);
+		// Clean up
+		document.body.removeChild(textArea)
 
-    return successful;
-  } catch (error) {
-    console.error('Fallback copy to clipboard failed:', error);
-    return false;
-  }
-};
+		return successful
+	} catch (error) {
+		console.error("Fallback copy to clipboard failed:", error)
+		return false
+	}
+}
 
 /**
  * Copy HTML content to clipboard
@@ -73,21 +73,21 @@ const fallbackCopyToClipboard = (text: string): boolean => {
  * }
  */
 export const copyHtmlToClipboard = async (html: string): Promise<boolean> => {
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      // Create a Blob with HTML content
-      const blob = new Blob([html], { type: 'text/html' });
-      const clipboardItem = new ClipboardItem({ 'text/html': blob });
+	try {
+		if (navigator.clipboard && window.isSecureContext) {
+			// Create a Blob with HTML content
+			const blob = new Blob([html], { type: "text/html" })
+			const clipboardItem = new ClipboardItem({ "text/html": blob })
 
-      await navigator.clipboard.write([clipboardItem]);
-      return true;
-    } else {
-      // Fallback: copy as plain text
-      return copyToClipboard(html);
-    }
-  } catch (error) {
-    console.error('Failed to copy HTML to clipboard:', error);
-    // Fallback to plain text
-    return copyToClipboard(html);
-  }
-};
+			await navigator.clipboard.write([clipboardItem])
+			return true
+		} else {
+			// Fallback: copy as plain text
+			return copyToClipboard(html)
+		}
+	} catch (error) {
+		console.error("Failed to copy HTML to clipboard:", error)
+		// Fallback to plain text
+		return copyToClipboard(html)
+	}
+}

@@ -80,11 +80,15 @@
   }
 
   &__tag-cell {
-    @include flex(flex-start, center, row, $spacing-xs);
+    @include flex(flex-start, center, row, $spacing-xs, wrap);
+  }
+
+  &__tags-container {
+    @include flex(flex-start, center, row, $spacing-xs, wrap);
   }
 
   &__tag-badge {
-    width: 100%;
+    flex-shrink: 0;
     justify-content: flex-start;
   }
 
