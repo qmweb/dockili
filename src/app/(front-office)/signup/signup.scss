@@ -1,0 +1,69 @@
+@use "../../../styles/base" as *;
+
+.signup {
+  min-height: 100vh;
+  @include flex(center, center);
+
+  & {
+    background: linear-gradient(135deg, $c-primary-lightest 0%, $c-white 100%);
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 400px;
+    padding: $spacing-xl;
+    background: $c-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-blurry;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    &__title {
+      @include title();
+
+      & {
+        font-size: $fs-xl;
+        font-weight: $fw-bold;
+        color: $c-primary-darkest;
+        margin-bottom: $spacing-sm;
+      }
+    }
+
+    &__subtitle {
+      @include text();
+
+      & {
+        color: $c-grey-dark;
+        font-size: $fs-regular-sm;
+      }
+    }
+  }
+
+  &__form {
+    @include flex(flex-start, flex-start, column, $spacing-lg);
+
+    &__field {
+      width: 100%;
+
+      &__label {
+        display: block;
+        font-size: $fs-sm;
+        font-weight: $fw-medium;
+        color: $c-primary-darkest;
+        margin-bottom: $spacing-xs;
+      }
+
+      &__input {
+        width: 100%;
+      }
+    }
+
+    &__submit {
+      width: 100%;
+      margin-top: $spacing-md;
+    }
+  }
+}

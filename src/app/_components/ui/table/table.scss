@@ -1,5 +1,5 @@
-@use '../../../../styles/base/variables' as *;
-@use '../../../../styles/base/mixins' as *;
+@use "../../../../styles/base/variables" as *;
+@use "../../../../styles/base/mixins" as *;
 
 .table {
   $self: &;
@@ -61,7 +61,7 @@
         border-bottom: none;
       }
 
-      &[data-state='selected'] {
+      &[data-state="selected"] {
         background: rgba($c-primary, 0.05);
       }
     }
@@ -100,13 +100,19 @@
 
   &__pagination {
     @include flex(space-between, center, row);
-    padding: $spacing-lg;
-    background: $c-white;
+
+    & {
+      padding: $spacing-lg;
+      background: $c-white;
+    }
 
     &__info {
       @include text();
-      font-size: $fs-sm;
-      color: $c-grey;
+
+      & {
+        font-size: $fs-sm;
+        color: $c-grey;
+      }
     }
 
     &__controls {
@@ -115,12 +121,15 @@
 
     &__button {
       @include text($fs-sm, $color: $c-black);
-      padding: $spacing-xs $spacing-sm;
-      border: 1px solid $c-grey-light;
-      border-radius: $border-radius-sm;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      height: 2rem;
+
+      & {
+        padding: $spacing-xs $spacing-sm;
+        border: 1px solid $c-grey-light;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        height: 2rem;
+      }
 
       &:hover:not(:disabled) {
         background: $c-grey-lighter;

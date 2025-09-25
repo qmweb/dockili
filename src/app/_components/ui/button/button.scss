@@ -1,5 +1,5 @@
-@use '../../../../styles/base/variables' as *;
-@use '../../../../styles/base/mixins' as *;
+@use "../../../../styles/base/variables" as *;
+@use "../../../../styles/base/mixins" as *;
 
 .button {
   $self: &;
@@ -7,9 +7,12 @@
 
   & {
     @include text($fs-sm, $fw-semibold, $color: $c-black);
-    position: relative;
-    white-space: nowrap;
-    border-radius: $border-radius-regular;
+
+    & {
+      position: relative;
+      white-space: nowrap;
+      border-radius: $border-radius-regular;
+    }
 
     &,
     * {
@@ -49,7 +52,9 @@
       color: $c-white;
     }
 
-    background-color: $c-black;
+    & {
+      background-color: $c-black;
+    }
   }
 
   &--primary {
@@ -58,7 +63,9 @@
       color: $c-white;
     }
 
-    background-color: $c-primary-dark;
+    & {
+      background-color: $c-primary-dark;
+    }
   }
 
   &--secondary {
@@ -67,7 +74,9 @@
       color: $c-white;
     }
 
-    background-color: $c-secondary;
+    & {
+      background-color: $c-secondary;
+    }
   }
 
   &--link {
@@ -77,12 +86,16 @@
       text-decoration: underline;
     }
 
-    background-color: transparent;
-    border: none;
+    & {
+      background-color: transparent;
+      border: none;
+    }
   }
 
   &--ghost {
-    background-color: transparent;
+    & {
+      background-color: transparent;
+    }
 
     &,
     * {
@@ -101,7 +114,9 @@
       color: $c-white;
     }
 
-    background-color: $c-success;
+    & {
+      background-color: $c-success;
+    }
   }
 
   &--warning {
@@ -110,7 +125,9 @@
       color: $c-white;
     }
 
-    background-color: $c-warning;
+    & {
+      background-color: $c-warning;
+    }
   }
 
   &--danger {
@@ -119,7 +136,9 @@
       color: $c-white;
     }
 
-    background-color: $c-danger;
+    & {
+      background-color: $c-danger;
+    }
   }
 
   &--xs {

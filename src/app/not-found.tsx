@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import "@/styles/pages/not-found.scss"
+import "./not-found.scss"
 
 export const metadata: Metadata = {
 	title: "Erreur 404",

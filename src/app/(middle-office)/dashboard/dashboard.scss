@@ -1,4 +1,4 @@
-@use '../base' as *;
+@use "../../../styles/base" as *;
 
 .dashboard {
   @include flex(flex-start, flex-start, row, $spacing-lg);
@@ -35,12 +35,18 @@
 
       &__empty {
         @include flex(center, center, column, $spacing-sm);
-        padding: $spacing-lg;
-        text-align: center;
+
+        & {
+          padding: $spacing-lg;
+          text-align: center;
+        }
 
         p {
           @include text($fs-regular, $color: $c-grey);
-          margin: 0;
+
+          & {
+            margin: 0;
+          }
         }
       }
     }
@@ -54,13 +60,19 @@
 
     &__total {
       @include title(h2);
-      fill: $c-grey-darker;
-      font-weight: $fw-bold;
+
+      & {
+        fill: $c-grey-darker;
+        font-weight: $fw-bold;
+      }
     }
 
     &__label {
       @include text(small);
-      fill: $c-grey;
+
+      & {
+        fill: $c-grey;
+      }
     }
   }
 }

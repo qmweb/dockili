@@ -1,4 +1,4 @@
-@use '../../../../styles/base' as *;
+@use "../../../../styles/base" as *;
 
 .card {
   border-radius: $border-radius-lg;
@@ -10,8 +10,10 @@
   &__header {
     @include flex(column, flex-start, row, $spacing-xs);
 
-    &:has(~ .card__content) {
-      padding-bottom: $spacing-md;
+    & {
+      &:has(~ .card__content) {
+        padding-bottom: $spacing-md;
+      }
     }
   }
 
@@ -31,7 +33,10 @@
 
   &__footer {
     @include flex(column, flex-start, row, $spacing-sm);
-    padding: $spacing-lg;
-    padding-top: $spacing-md;
+
+    & {
+      padding: $spacing-lg;
+      padding-top: $spacing-md;
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 import type { Metadata } from "next"
 
-import "@/styles/pages/error.scss"
+import "./error.scss"
 
 export const metadata: Metadata = {
 	title: "Erreur",

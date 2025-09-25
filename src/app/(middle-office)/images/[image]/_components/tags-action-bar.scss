@@ -1,5 +1,5 @@
-@use '../../../../../styles/base/mixins' as *;
-@use '../../../../../styles/base/variables' as *;
+@use "../../../../../styles/base/mixins" as *;
+@use "../../../../../styles/base/variables" as *;
 
 .tags-action-bar {
   $self: &;
@@ -17,7 +17,10 @@
 
   &__content {
     @include flex(space-between, center, row);
-    padding: $spacing-md $spacing-md;
+
+    & {
+      padding: $spacing-md $spacing-md;
+    }
   }
 
   &__info {

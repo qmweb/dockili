@@ -5,11 +5,31 @@ services:
       dockerfile: docker/Dockerfile.dev
     restart: on-failure:1
     ports:
-      - '3000:3000'
+      - "3000:3000"
+      - "4983:4983"
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
     env_file:
       - ./.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/dokistry
     command: yarn run start:dev
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-dokistry}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

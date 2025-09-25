@@ -3,8 +3,6 @@ import type { Metadata, Viewport } from "next"
 import type { ReactNode } from "react"
 import { Toaster } from "sonner"
 
-import Layout from "@/app/_components/layout"
-
 import { APP_URL } from "@/utils/constants/config"
 import { nunitoSans } from "@/utils/fonts"
 import { ReactQueryProvider } from "@/utils/providers/ReactQueryProvider"
@@ -61,7 +59,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<html lang="fr">
 			<body className={`${nunitoSans.variable}`}>
 				<ReactQueryProvider>
-					<Layout>{children}</Layout>
+					{children}
 					<Toaster position="top-right" richColors />
 				</ReactQueryProvider>
 			</body>

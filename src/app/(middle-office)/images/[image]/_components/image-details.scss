@@ -1,5 +1,5 @@
-@use '../../../../../styles/base/mixins' as *;
-@use '../../../../../styles/base/variables' as *;
+@use "../../../../../styles/base/mixins" as *;
+@use "../../../../../styles/base/variables" as *;
 
 .imageDetails {
   $self: &;
@@ -24,11 +24,14 @@
 
 .imageDetails__title {
   @include title();
-  font-size: $fs-xxl;
-  font-weight: $fw-bold;
-  color: $c-black;
-  margin: 0;
-  word-break: break-all;
+
+  & {
+    font-size: $fs-xxl;
+    font-weight: $fw-bold;
+    color: $c-black;
+    margin: 0;
+    word-break: break-all;
+  }
 }
 
 .imageDetails__stats {
@@ -48,10 +51,13 @@
 
 .imageDetails__info__title {
   @include title();
-  font-size: $fs-xl;
-  font-weight: $fw-semibold;
-  color: $c-black;
-  margin: 0 0 $spacing-lg;
+
+  & {
+    font-size: $fs-xl;
+    font-weight: $fw-semibold;
+    color: $c-black;
+    margin: 0 0 $spacing-lg;
+  }
 }
 
 .imageDetails__info__grid {
@@ -68,19 +74,25 @@
 
 .imageDetails__info__label {
   @include text();
-  font-size: $fs-sm;
-  font-weight: $fw-medium;
-  color: $c-grey;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+
+  & {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $c-grey;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 }
 
 .imageDetails__info__value {
   @include text();
-  font-size: $fs-md;
-  font-weight: $fw-medium;
-  color: $c-black;
-  word-break: break-all;
+
+  & {
+    font-size: $fs-md;
+    font-weight: $fw-medium;
+    color: $c-black;
+    word-break: break-all;
+  }
 }
 
 // Tags section styles are now handled by the ImageTagsTable component
@@ -103,13 +115,16 @@
 .imageDetails__error__title,
 .imageDetails__notFound__title {
   @include title();
-  font-size: $fs-xxl;
-  color: $c-danger;
-  margin: 0 0 $spacing-sm;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: $spacing-sm;
+
+  & {
+    font-size: $fs-xxl;
+    color: $c-danger;
+    margin: 0 0 $spacing-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+  }
 }
 
 .imageDetails__error__icon,
@@ -124,9 +139,12 @@
 .imageDetails__error__message,
 .imageDetails__notFound__message {
   @include text();
-  color: $c-grey;
-  margin: 0 0 $spacing-lg;
-  font-size: $fs-lg;
+
+  & {
+    color: $c-grey;
+    margin: 0 0 $spacing-lg;
+    font-size: $fs-lg;
+  }
 }
 
 .imageDetails__notFound__title {

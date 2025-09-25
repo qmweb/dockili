@@ -1,5 +1,0 @@
-@use '../../../styles/base' as *;
-
-body {
-  @include flex(stretch, stretch, row);
-}

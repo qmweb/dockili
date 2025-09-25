@@ -1,6 +1,6 @@
-@use '../base' as *;
+@use "../styles/base" as *;
 
-.not-found {
+.error {
   @include flex(center, center, column, $spacing-xxl);
 
   & {

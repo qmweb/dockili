@@ -1,31 +1,126 @@
-# Ignore node_modules
-node_modules
+# Dependencies and package managers
+node_modules/
+.yarn/
+.pnpm-store/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
 
-# Ignore logs
-logs
+# Build outputs and caches
+.next/
+.nuxt/
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+.cache/
+.parcel-cache/
+.turbo/
+
+# Environment and configuration
+.env*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
 *.log
 npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.next
-.git
 
-# Ignore build directories
-dist
-build
+# Version control
+.git/
+.gitignore
+.gitattributes
 
-# Ignore environment variables
-.env
+# Docker files (avoid recursive copying)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
 
-# Ignore Docker files
-Dockerfile
-docker-compose.yml
-
-# Ignore IDE/editor config files
+# IDE and editor files
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
 
-# Ignore OS generated files
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+
+# Documentation and development files
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+docs/
+examples/
+tests/
+test/
+__tests__/
+*.test.*
+*.spec.*
+
+# Development tools and configs
+biome.json
+commitlint.config.js
+lefthook.yml
+.eslintrc*
+.prettierrc*
+.stylelintrc*
+.editorconfig
+tsconfig.tsbuildinfo
+
+# Database migrations (keep only schema, not migration files)
+src/utils/lib/db/migrations/
+
+# Scripts (not needed in production)
+scripts/
+
+# Large binary files and assets that aren't needed
+*.exe
+*.dll
+*.so
+*.dylib
+*.node
+*.wasm
+*.map
+
+# Antd and other large library files
+node_modules/antd/dist/
+node_modules/@ant-design/
+node_modules/lucide-react/dist/
+node_modules/recharts/dist/
+
+# TypeScript declaration files (not needed in production)
+*.d.ts
+!src/**/*.d.ts
+
+# Source maps (not needed in production)
+*.map

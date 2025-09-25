@@ -1,7 +1,7 @@
 "use client"
 
 import clsx from "clsx"
-import { ArrowUpRightIcon, MoreVertical, Trash2 } from "lucide-react"
+import { ArrowUpRightIcon, LogOut, MoreVertical, Trash2 } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
@@ -9,6 +9,7 @@ import "./app-sidebar.scss"
 
 import { toast } from "sonner"
 import {
+	Button,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
@@ -22,6 +23,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/app/_components/ui"
+import { clientSignOut } from "@/utils/lib/auth-client"
 import type {
 	SidebarImage,
 	SidebarMenuItem as SidebarMenuItemType,
@@ -39,8 +41,9 @@ export function AppSidebar({ className }: AppSidebarProps) {
 	const router = useRouter()
 
 	const isActiveUrl = (url: string): boolean => {
-		// Handle dashboard/home page
-		if (url === "/" && pathname === "/") return true
+		// Handle dashboard page - both "/" and "/dashboard" should be active for dashboard
+		if (url === "/" && (pathname === "/" || pathname === "/dashboard")) return true
+		if (url === "/dashboard" && (pathname === "/" || pathname === "/dashboard")) return true
 
 		// Handle image pages
 		if (url.startsWith("/images/") && pathname.startsWith("/images/")) {
@@ -71,6 +74,22 @@ export function AppSidebar({ className }: AppSidebarProps) {
 
 	const handleSeeImage = (imageUrl: string) => {
 		router.push(imageUrl)
+	}
+
+	const handleLogout = async () => {
+		try {
+			const result = await clientSignOut()
+			console.log("logout result", result)
+			if (result.error) {
+				toast.error("Failed to sign out")
+			} else {
+				toast.success("Signed out successfully")
+				router.push("/signin")
+			}
+		} catch (error) {
+			console.error("Logout error:", error)
+			toast.error("Failed to sign out")
+		}
 	}
 
 	const renderMenuItems = (items: SidebarImage[]) => {
@@ -116,9 +135,9 @@ export function AppSidebar({ className }: AppSidebarProps) {
 						<SidebarGroupLabel>Dashboard</SidebarGroupLabel>
 						<SidebarGroupContent>
 							<SidebarMenu>
-								<SidebarMenuItem isActive={isActiveUrl("/")}>
+								<SidebarMenuItem isActive={isActiveUrl("/dashboard")}>
 									<SidebarMenuButton asChild>
-										<a href="/">
+										<a href="/dashboard">
 											<SidebarIcon iconName="LayoutDashboard" />
 											Dashboard
 										</a>
@@ -179,6 +198,18 @@ export function AppSidebar({ className }: AppSidebarProps) {
 							</SidebarGroup>
 						))
 					) : null}
+
+					{/* Logout Button */}
+					<div className="app-sidebar__logout">
+						<SidebarMenu>
+							<SidebarMenuItem>
+								<Button onClick={handleLogout}>
+									<LogOut size={16} />
+									Sign Out
+								</Button>
+							</SidebarMenuItem>
+						</SidebarMenu>
+					</div>
 				</SidebarContent>
 			</Sidebar>
 		</div>

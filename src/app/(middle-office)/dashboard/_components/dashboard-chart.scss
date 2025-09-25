@@ -1,4 +1,4 @@
-@use '../../../../styles/base' as *;
+@use "../../../../styles/base" as *;
 
 .dashboard {
   &__chart {
@@ -74,7 +74,10 @@
     &__header {
       &__content {
         @include flex(space-between, center, row, $spacing-md);
-        width: 100%;
+
+        & {
+          width: 100%;
+        }
       }
     }
 

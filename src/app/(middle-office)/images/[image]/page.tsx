@@ -1,8 +1,8 @@
-import { registryService } from "@/features/registry"
-import "@/styles/pages/image.scss"
 import type { Metadata } from "next"
+import { registryService } from "@/features/registry"
 import type { RegistryRepositoriesResponse, Repository } from "@/utils/types/registry.interface"
 import ImageDetailsWrapper from "./_components/image-details-wrapper"
+import "./image.scss"
 
 interface ImagePageProps {
 	params: {
